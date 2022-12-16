@@ -17,16 +17,11 @@ class Duckdb < Formula
   end
 
   depends_on "cmake" => :build
-  depends_on "python@3.11" => :build
 
   def install
-    ENV.deparallelize if OS.linux? # amalgamation builds take GBs of RAM
-    mkdir "build/amalgamation"
-    python3 = "python3.11"
-    system python3, "scripts/amalgamation.py", "--extended"
-    system python3, "scripts/parquet_amalgamation.py"
-    cd "src/amalgamation" do
-      system "cmake", "../..", *std_cmake_args
+    mkdir "build"
+    cd "build" do
+      system "cmake", "..", *std_cmake_args, "-DBUILD_ICU_EXTENSION=1", "-DBUILD_JSON_EXTENSION=1", "-DBUILD_PARQUET_EXTENSION=1"
       system "make"
       system "make", "install"
       bin.install "duckdb"
