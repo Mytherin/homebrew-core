@@ -3,7 +3,7 @@ class Duckdb < Formula
   homepage "https://www.duckdb.org"
   url "https://github.com/duckdb/duckdb.git",
       tag:      "v0.7.0",
-      revision: "f7827396d70232a0434c91142809deef6e0b6092"
+      revision: "773b6d9b076c48ce46e13f97e3353fb3e41f1788"
   license "MIT"
 
   bottle do
